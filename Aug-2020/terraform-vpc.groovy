@@ -16,7 +16,7 @@ node("terraform"){
         vpc_region='us-west-2'
     }
     stage("Pull Repo"){
-        git url: 'https://github.com/ikambarov/terraform-vpc.git'
+        git url: 'https://github.com/shamal112mn/terraform-vpc-1.git'
     }
     withCredentials([usernamePassword(credentialsId: 'jenkins_aws_keys', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
         withEnv(["AWS_REGION=${vpc_region}"]) {
@@ -25,7 +25,7 @@ node("terraform"){
                     source setenv.sh ${vpc_env}.tfvars
                     terraform init
                 """
-            }     
+            }        
             if(params.ACTION == 'Destroy'){
                 stage("Terraform Destroy"){
                     sh """
@@ -44,7 +44,7 @@ node("terraform"){
                 stage("Terraform Plan"){
                     sh """
                         terraform plan -var-file ${vpc_env}.tfvars
-                    """                
+                    """
                 }
             }       
         }
