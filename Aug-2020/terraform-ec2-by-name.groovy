@@ -17,14 +17,15 @@ node("terraform"){
         ec2_region='us-west-2'
     }
     def tfvar = """
-        s3_bucket = "jenkins-terraform-evolvecybertraining"
-        s3_folder_project = "terraform-ec2-by-name"
+        s3_bucket = "jenkins-terraform-bucker-s3-001"
+        s3_folder_project = "terraform_ec2"
         s3_folder_region = "us-east-1"
         s3_folder_type = "class"
         s3_tfstate_file = "infrastructure.tfstate"
+
         environment = "${ec2_env}"
         region      = "${ec2_region}"
-        public_key  = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDXUI8Mt0W/65CPA5rnR4auE8qVb08c6qR9Ca0yQaz9xM6EuShYX8jmktYbrdCIkZTMXbRF58CkWID/NHjYX4ZWZHwLi5uf2RfQegF67+kv6yJ2cgG4AsxUmWqlznxvm9615r8tpzBkKgsya58H+4aPRKqLJmhRm3ZZCa7t2HE7S+RR7fq+WtaQ3BMaKog9AVfHSEP8Gp4Ho7WUv5YlLXu5hlYC+m2oxrSCqXRFIhDtDuyphkzS93gDy8EVBkWnJFkoXT2LbVydcJaNCpEdjB1YFEEc1kMOXCAZ0w5N8PiWgdlY0lPeRXdH1RLX+WCM5FVOT9ujrq8PTQSYIkl2pek3 ikambarov@Islams-MacBook-Pro.local"
+        public_key  = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCZwRr7o/snUnsOljhWEMIVYKAD60QkDjPI1JPOMD/lBS3bttiw/7NxQt5GZHZVkzSw+k3G6s+EwK20EhkAHZ5p9znQVjpfchxjZBcU895MqiquB/Is+fgjUWUqFYtbIDFT05gLGmA+vcTSnI6tgYyundquDPoOp/7nKc4Yum2En6XUEhNmkiQBKTMwh0SecrblCpfcqsO63XCZURZ8j/sVJF7IdSuiSe0SpUeW955JDS7PmQcO4GrmFMHY196oOfGjXXdntjT2boXcf+GDPm9rShwvqHi5D+azLuUPaUbSzJU7KntydOW+pmNAaAoM1kB92m4RdfpD1qSY0C3CDdu3 root@docker"
         ami_name    = "${params.AMI_NAME}"
     """
     stage("Pull Repo"){

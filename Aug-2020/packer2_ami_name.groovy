@@ -19,17 +19,17 @@ else if(params.environment == "Prod") {
     aws_region_var = "us-west-2"
 }
 
-def random_name = "Dev-fcecf9ab-a0be-4fd0-aba4-c5a892165b42" //"${params.environment}-${ UUID.randomUUID().toString()}"
+def random_name = "${params.environment}-${ UUID.randomUUID().toString()}"
  
 
 node("packer"){
     stage('Pull Repo') {
-        git url: 'https://github.com/ikambarov/packer.git'
+        git url: 'https://github.com/shamal112mn/packer.git'
     }
 
     withCredentials([usernamePassword(credentialsId: 'jenkins_aws_keys', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
         withEnv(["AWS_REGION=${aws_region_var}", "PACKER_AMI_NAME=${random_name}"]) {
-/*
+
             stage('Packer Validate') {
                 sh 'packer validate apache.json'
             }
@@ -39,7 +39,7 @@ node("packer"){
                     packer build apache.json
                 """               
             }
-*/
+
             stage('Trigger Deploy Instance'){
                 build wait: true, job: 'job3-terraform-ec2-ami-name', parameters: [
                     string(name: 'ACTION', value: "Apply"),

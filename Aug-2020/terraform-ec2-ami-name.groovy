@@ -24,7 +24,7 @@ node("terraform"){
         s3_bucket = "jenkins-terraform-bucker-s3-001"
         s3_folder_project = "terraform_ec2"
         s3_folder_region = "us-east-1"
-        s3_folder_type = "docker_test"
+        s3_folder_type = "class"
         s3_tfstate_file = "infrastructure.tfstate"
         
         environment = "${ec2_env}"
